@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Management System | Skhanyiso Nkosi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #1a1a2e;
+      --color-secondary: #16213e;
+      --color-accent: #0f4c75;
+      --color-accent-light: #3282b8;
+      --color-green: #06d6a0;
+      --color-orange: #ff6b35;
+      --color-off-white: #f8f9fa;
+      --color-light-gray: #e9ecef;
+      --color-gray: #6c757d;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-primary);
+      line-height: 1.7;
+      background: var(--color-off-white);
+    }
+
+    .back-link {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: white;
+      color: var(--color-primary);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      transform: translateX(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-hero {
+      min-height: 75vh;
+      background: linear-gradient(135deg, #0f4c75 0%, #1a1a2e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 2rem;
+    }
+
+    .project-hero::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(50, 130, 184, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(6, 214, 160, 0.1) 0%, transparent 50%);
+    }
+
+    .hero-content {
+      max-width: 1000px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      color: white;
+    }
+
+    .project-tag {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-description {
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      opacity: 0.95;
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .tech-badge {
+      padding: 0.5rem 1.25rem;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+    }
+
+    .overview-content p {
+      color: var(--color-gray);
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+      color: white;
+      padding: 2rem;
+      border-radius: 16px;
+      margin-top: 2rem;
+    }
+
+    .highlight-box h4 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .highlight-box p {
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.8;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      border-top: 4px solid transparent;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-top-color: var(--color-accent);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: white;
+      font-size: 1.75rem;
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .feature-card p {
+      color: var(--color-gray);
+      line-height: 1.7;
+    }
+
+    .architecture-section {
+      background: white;
+    }
+
+    .mvc-diagram {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .mvc-component {
+      background: var(--color-off-white);
+      padding: 2.5rem;
+      border-radius: 16px;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .mvc-component:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .mvc-component::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+      border-radius: 2px;
+    }
+
+    .mvc-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: white;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .mvc-component h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .mvc-component p {
+      color: var(--color-gray);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .tech-deep-dive {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .tech-deep-dive .section-label {
+      color: var(--color-green);
+    }
+
+    .tech-deep-dive .section-title {
+      color: white;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .tech-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .tech-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-5px);
+    }
+
+    .tech-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+      color: var(--color-green);
+    }
+
+    .tech-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .tech-card li {
+      padding: 0.5rem 0;
+      color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .tech-card li::before {
+      content: '▹';
+      color: var(--color-green);
+      font-weight: 700;
+    }
+
+    .crud-section {
+      background: var(--color-off-white);
+    }
+
+    .crud-operations {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .crud-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--color-accent);
+    }
+
+    .crud-label {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--color-accent);
+      color: white;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+
+    .crud-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .crud-card p {
+      color: var(--color-gray);
+      line-height: 1.7;
+    }
+
+    .security-section {
+      background: white;
+    }
+
+    .security-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .security-item {
+      text-align: center;
+      padding: 2rem;
+      background: var(--color-off-white);
+      border-radius: 16px;
+    }
+
+    .security-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--color-green), var(--color-accent-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .security-item h4 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--color-primary);
+    }
+
+    .security-item p {
+      color: var(--color-gray);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 992px) {
+      .overview-grid,
+      .mvc-diagram,
+      .crud-operations {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .back-link {
+        position: static;
+        margin: 1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 3rem 0;
+      }
+
+      .tech-grid,
+      .security-features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    Back to Portfolio
+  </a>
+
+  <section class="project-hero">
+    <div class="hero-content">
+      <div class="project-tag">Web Application Development</div>
+      <h1 class="hero-title">Student Management System</h1>
+      <p class="hero-description">
+        A robust administrative platform for managing student registration, roles, and access control built with clean MVC architecture and comprehensive CRUD operations
+      </p>
+      <div class="tech-stack">
+        <span class="tech-badge">C#</span>
+        <span class="tech-badge">ASP.NET Core</span>
+        <span class="tech-badge">Entity Framework</span>
+        <span class="tech-badge">SQL Server</span>
+        <span class="tech-badge">MVC Pattern</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="section-label">Project Overview</span>
+      <h2 class="section-title">Enterprise-Grade Student Administration</h2>
+      
+      <div class="overview-grid">
+        <div class="overview-content">
+          <p>
+            The Student Management System is a comprehensive web application designed to streamline administrative tasks in educational institutions. Built using ASP.NET Core MVC, this system provides a centralized platform for managing student records, user roles, and access permissions.
+          </p>
+          <p>
+            The application follows industry-standard MVC architecture, ensuring separation of concerns and maintainability. It features a complete CRUD (Create, Read, Update, Delete) implementation for student records, role-based access control, and a responsive user interface that works seamlessly across devices.
+          </p>
+          <p>
+            With Entity Framework Core as the ORM and SQL Server as the database backend, the system efficiently handles data persistence while maintaining data integrity through proper constraints and validation.
+          </p>
+
+          <div class="highlight-box">
+            <h4>Key Achievement</h4>
+            <p>
+              Successfully implemented a scalable architecture that can handle thousands of student records with optimized database queries and efficient data retrieval patterns.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <img src="assets/student-system.png" alt="Student Management System" style="width: 100%; border-radius: 16px; box-shadow: var(--shadow-lg);" onerror="this.style.background='linear-gradient(135deg, #0f4c75, #3282b8)'; this.style.height='400px';">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--color-off-white);">
+    <div class="container">
+      <span class="section-label">Core Functionality</span>
+      <h2 class="section-title">System Features</h2>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">👥</div>
+          <h3>Student Registry</h3>
+          <p>Complete student information management including personal details, academic records, enrollment status, and contact information.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔐</div>
+          <h3>Role-Based Access</h3>
+          <p>Granular permission system with different access levels for administrators, faculty, and staff members.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3>Advanced Search</h3>
+          <p>Powerful search and filtering capabilities to quickly find students by name, ID, department, or enrollment year.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Data Validation</h3>
+          <p>Server-side and client-side validation ensuring data integrity and preventing invalid entries.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Reporting Tools</h3>
+          <p>Generate comprehensive reports on student demographics, enrollment statistics, and academic performance.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h3>Audit Trail</h3>
+          <p>Track all system changes with timestamps and user information for accountability and compliance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section architecture-section">
+    <div class="container">
+      <span class="section-label">Software Design</span>
+      <h2 class="section-title">MVC Architecture</h2>
+
+      <div class="mvc-diagram">
+        <div class="mvc-component">
+          <div class="mvc-icon">M</div>
+          <h3>Model</h3>
+          <p>
+            Entity classes representing students, users, and roles. Includes data annotations for validation and database mapping using Entity Framework Core.
+          </p>
+        </div>
+
+        <div class="mvc-component">
+          <div class="mvc-icon">V</div>
+          <h3>View</h3>
+          <p>
+            Razor views with responsive layouts, form helpers, and client-side validation. Bootstrap integration for consistent, mobile-friendly UI.
+          </p>
+        </div>
+
+        <div class="mvc-component">
+          <div class="mvc-icon">C</div>
+          <h3>Controller</h3>
+          <p>
+            Action methods handling HTTP requests, business logic coordination, and data flow between models and views with proper error handling.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: 3rem; padding: 2rem; background: var(--color-off-white); border-radius: 16px;">
+        <h4 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1rem;">Benefits of MVC Pattern</h4>
+        <p style="color: var(--color-gray); line-height: 1.8;">
+          The Model-View-Controller pattern provides clear separation of concerns, making the codebase more maintainable and testable. Each component has a distinct responsibility: Models handle data and business logic, Views manage presentation, and Controllers coordinate the flow, resulting in a scalable and organized application structure.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tech-deep-dive">
+    <div class="container">
+      <span class="section-label">Technology Stack</span>
+      <h2 class="section-title">Technical Implementation</h2>
+
+      <div class="tech-grid">
+        <div class="tech-card">
+          <h4>Backend Framework</h4>
+          <ul>
+            <li>ASP.NET Core 6.0</li>
+            <li>Entity Framework Core</li>
+            <li>LINQ for data queries</li>
+            <li>Dependency Injection</li>
+            <li>Async/Await patterns</li>
+          </ul>
+        </div>
+
+        <div class="tech-card">
+          <h4>Database Layer</h4>
+          <ul>
+            <li>SQL Server 2019</li>
+            <li>Code-First migrations</li>
+            <li>Stored procedures</li>
+            <li>Foreign key relationships</li>
+            <li>Indexed queries</li>
+          </ul>
+        </div>
+
+        <div class="tech-card">
+          <h4>Frontend Technologies</h4>
+          <ul>
+            <li>Razor view engine</li>
+            <li>Bootstrap 5 framework</li>
+            <li>jQuery for interactions</li>
+            <li>Client-side validation</li>
+            <li>Responsive design</li>
+          </ul>
+        </div>
+
+        <div class="tech-card">
+          <h4>Security & Authentication</h4>
+          <ul>
+            <li>ASP.NET Identity</li>
+            <li>Role-based authorization</li>
+            <li>Password hashing</li>
+            <li>CSRF protection</li>
+            <li>SQL injection prevention</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section crud-section">
+    <div class="container">
+      <span class="section-label">Data Operations</span>
+      <h2 class="section-title">CRUD Functionality</h2>
+
+      <div class="crud-operations">
+        <div class="crud-card">
+          <div class="crud-label">CREATE</div>
+          <h4>Student Registration</h4>
+          <p>
+            Add new student records with comprehensive forms including personal information, academic details, and contact data. Features real-time validation and duplicate detection to ensure data quality.
+          </p>
+        </div>
+
+        <div class="crud-card">
+          <div class="crud-label">READ</div>
+          <h4>View & Search</h4>
+          <p>
+            Display student information in organized tables with pagination, sorting, and advanced filtering options. Quick view modals for detailed student profiles without page navigation.
+          </p>
+        </div>
+
+        <div class="crud-card">
+          <div class="crud-label">UPDATE</div>
+          <h4>Edit Records</h4>
+          <p>
+            Modify existing student information with pre-populated forms, change tracking, and confirmation prompts. Supports batch updates for efficient administrative tasks.
+          </p>
+        </div>
+
+        <div class="crud-card">
+          <div class="crud-label">DELETE</div>
+          <h4>Remove Entries</h4>
+          <p>
+            Safely delete student records with soft-delete functionality, maintaining data integrity. Includes confirmation dialogs and audit logging for accountability.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section security-section">
+    <div class="container">
+      <span class="section-label">Application Security</span>
+      <h2 class="section-title">Security Measures</h2>
+
+      <div class="security-features">
+        <div class="security-item">
+          <div class="security-icon">🔒</div>
+          <h4>Authentication</h4>
+          <p>Secure login system with password hashing and session management</p>
+        </div>
+
+        <div class="security-item">
+          <div class="security-icon">🛡️</div>
+          <h4>Authorization</h4>
+          <p>Role-based access control limiting features by user permissions</p>
+        </div>
+
+        <div class="security-item">
+          <div class="security-icon">✅</div>
+          <h4>Input Validation</h4>
+          <p>Comprehensive validation preventing malicious data entry</p>
+        </div>
+
+        <div class="security-item">
+          <div class="security-icon">🔐</div>
+          <h4>Data Protection</h4>
+          <p>Encrypted sensitive data and secure database connections</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 4rem; text-align: center;">
+        <p style="font-size: 1.15rem; color: var(--color-gray); max-width: 800px; margin: 0 auto; line-height: 1.8;">
+          This project demonstrates proficiency in full-stack web development, database design, software architecture, and security best practices using the .NET ecosystem.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.feature-card, .mvc-component, .tech-card, .crud-card, .security-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

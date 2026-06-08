@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dog Walker App - UI/UX Case Study | Skhanyiso Nkosi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #1a1a2e;
+      --color-secondary: #16213e;
+      --color-accent: #ff6b6b;
+      --color-accent-light: #ff8e8e;
+      --color-blue: #4a90e2;
+      --color-green: #4ecdc4;
+      --color-off-white: #f8f9fa;
+      --color-light-gray: #e9ecef;
+      --color-gray: #6c757d;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-primary);
+      line-height: 1.7;
+      background: var(--color-off-white);
+    }
+
+    .back-link {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: white;
+      color: var(--color-primary);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      transform: translateX(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .case-study-hero {
+      min-height: 70vh;
+      background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 2rem;
+    }
+
+    .case-study-hero::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 0.1) 0%, transparent 50%);
+    }
+
+    .hero-content {
+      max-width: 1000px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      color: white;
+    }
+
+    .project-tag {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-description {
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      opacity: 0.95;
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .meta-label {
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+    }
+
+    .prototype-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2.5rem;
+      background: white;
+      color: var(--color-accent);
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-top: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .prototype-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+    }
+
+    .overview-content h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .overview-content p {
+      color: var(--color-gray);
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .feature-list li {
+      padding: 0.75rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    .feature-list li:last-child {
+      border-bottom: none;
+    }
+
+    .feature-icon {
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+
+    .project-details {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .detail-value {
+      color: var(--color-gray);
+      text-align: right;
+    }
+
+    .design-system {
+      background: white;
+      padding: 4rem 2rem;
+    }
+
+    .color-palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .color-swatch {
+      text-align: center;
+    }
+
+    .color-box {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s ease;
+    }
+
+    .color-box:hover {
+      transform: scale(1.05);
+    }
+
+    .color-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .color-code {
+      font-size: 0.8rem;
+      color: var(--color-gray);
+      font-family: monospace;
+    }
+
+    .typography-showcase {
+      background: var(--color-off-white);
+      padding: 3rem;
+      border-radius: 20px;
+      margin: 3rem 0;
+    }
+
+    .typography-showcase h1 {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .typography-showcase h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .typography-showcase h3 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .typography-showcase p {
+      font-size: 1rem;
+      color: var(--color-gray);
+      line-height: 1.8;
+    }
+
+    .screens-showcase {
+      background: var(--color-primary);
+      padding: 5rem 0;
+    }
+
+    .screens-showcase .section-title {
+      color: white;
+      text-align: center;
+    }
+
+    .screens-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .screen-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .screen-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .screen-image {
+      width: 100%;
+      aspect-ratio: 9/16;
+      object-fit: cover;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .screen-info {
+      padding: 1.5rem;
+      color: white;
+    }
+
+    .screen-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .screen-info p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.95rem;
+    }
+
+    .process-section {
+      background: var(--color-off-white);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .process-step {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .process-step:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 5px 20px rgba(255, 107, 107, 0.3);
+    }
+
+    .process-step h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .process-step p {
+      color: var(--color-gray);
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+      padding: 6rem 2rem;
+      text-align: center;
+      color: white;
+    }
+
+    .cta-section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 992px) {
+      .overview-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .back-link {
+        position: static;
+        margin: 1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 3rem 0;
+      }
+
+      .screens-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    Back to Portfolio
+  </a>
+
+  <section class="case-study-hero">
+    <div class="hero-content">
+      <div class="project-tag">UI/UX Design Case Study</div>
+      <h1 class="hero-title">Dog Walker Mobile App</h1>
+      <p class="hero-description">
+        A comprehensive mobile solution connecting pet owners with trusted dog walkers through intuitive design and seamless user experience
+      </p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Role</span>
+          <span>UI/UX Designer</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Duration</span>
+          <span>3 Weeks</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Tools</span>
+          <span>Figma, Adobe Illustrator</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Platform</span>
+          <span>iOS & Android</span>
+        </div>
+      </div>
+      <a href="https://www.figma.com/proto/ocRjkHojglsz0wreyhwt6i/221050584?node-id=91-957&p=f&t=BcpemaJfUQom0guM-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=30%3A273" target="_blank" class="prototype-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+        </svg>
+        View Interactive Prototype
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="section-label">Project Overview</span>
+      <h2 class="section-title">Designing Trust & Convenience</h2>
+      
+      <div class="overview-grid">
+        <div class="overview-content">
+          <h3>The Challenge</h3>
+          <p>
+            Pet owners struggle to find reliable, trustworthy dog walkers, while professionals lack a streamlined platform to showcase their services and manage bookings. The challenge was to create an intuitive mobile experience that builds trust and simplifies the entire process.
+          </p>
+
+          <h3>Key Features</h3>
+          <ul class="feature-list">
+            <li>
+              <span class="feature-icon">✓</span>
+              <span>Smart booking system with calendar integration</span>
+            </li>
+            <li>
+              <span class="feature-icon">✓</span>
+              <span>Verified walker profiles with ratings & reviews</span>
+            </li>
+            <li>
+              <span class="feature-icon">✓</span>
+              <span>Real-time GPS tracking during walks</span>
+            </li>
+            <li>
+              <span class="feature-icon">✓</span>
+              <span>Secure in-app payments</span>
+            </li>
+            <li>
+              <span class="feature-icon">✓</span>
+              <span>Photo & activity report sharing</span>
+            </li>
+            <li>
+              <span class="feature-icon">✓</span>
+              <span>Instant messaging between owners & walkers</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="project-details">
+          <h3 style="margin-bottom: 1.5rem; font-family: var(--font-display); font-size: 1.5rem;">Project Details</h3>
+          <div class="detail-row">
+            <span class="detail-label">Timeline</span>
+            <span class="detail-value">3 Weeks</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">My Role</span>
+            <span class="detail-value">UI/UX Designer</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Design Tool</span>
+            <span class="detail-value">Figma, Adobe Illustrator</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Platform</span>
+            <span class="detail-value">iOS & Android Mobile App</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Design System</span>
+            <span class="detail-value">Material Design 3</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Deliverables</span>
+            <span class="detail-value">High-fidelity mockups, Interactive prototype, Design system</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="design-system">
+    <div class="container">
+      <span class="section-label">Visual Identity</span>
+      <h2 class="section-title">Design System</h2>
+
+      <h3 style="margin: 2rem 0 1rem; font-family: var(--font-display); font-size: 1.5rem;">Color Palette</h3>
+      <div class="color-palette">
+        <div class="color-swatch">
+          <div class="color-box" style="background: #ff6b6b;"></div>
+          <div class="color-name">Primary Coral</div>
+          <div class="color-code">#FF6B6B</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-box" style="background: #4ecdc4;"></div>
+          <div class="color-name">Secondary Teal</div>
+          <div class="color-code">#4ECDC4</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-box" style="background: #4a90e2;"></div>
+          <div class="color-name">Accent Blue</div>
+          <div class="color-code">#4A90E2</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-box" style="background: #ffd93d;"></div>
+          <div class="color-name">Warning Yellow</div>
+          <div class="color-code">#FFD93D</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-box" style="background: #1a1a2e;"></div>
+          <div class="color-name">Text Dark</div>
+          <div class="color-code">#1A1A2E</div>
+        </div>
+      </div>
+
+      <div class="typography-showcase">
+        <h1>Poppins Bold</h1>
+        <h2>Poppins SemiBold</h2>
+        <h3>Poppins Medium</h3>
+        <p>Body text uses Inter Regular for optimal readability across all screen sizes. The font pairing creates a modern, friendly, and approachable aesthetic perfect for a pet-focused application.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="screens-showcase">
+    <div class="container">
+      <h2 class="section-title">Screen Designs</h2>
+      
+      <div class="screens-grid">
+        <div class="screen-card">
+          <div class="screen-image"></div>
+          <div class="screen-info">
+            <h3>Onboarding & Login</h3>
+            <p>Welcoming first-time users with clear value propositions and seamless social authentication options.</p>
+          </div>
+        </div>
+
+        <div class="screen-card">
+          <div class="screen-image"></div>
+          <div class="screen-info">
+            <h3>Home Dashboard</h3>
+            <p>Personalized view showing upcoming walks, quick actions, and walker recommendations.</p>
+          </div>
+        </div>
+
+        <div class="screen-card">
+          <div class="screen-image"></div>
+          <div class="screen-info">
+            <h3>Walker Discovery</h3>
+            <p>Browse and filter verified dog walkers with detailed profiles, ratings, and availability.</p>
+          </div>
+        </div>
+
+        <div class="screen-card">
+          <div class="screen-image"></div>
+          <div class="screen-info">
+            <h3>Booking Flow</h3>
+            <p>Simple 3-step booking process with date selection, walker matching, and instant confirmation.</p>
+          </div>
+        </div>
+
+        <div class="screen-card">
+          <div class="screen-image"></div>
+          <div class="screen-info">
+            <h3>Live GPS Tracking</h3>
+            <p>Real-time map showing walker's location, route taken, and estimated return time.</p>
+          </div>
+        </div>
+
+        <div class="screen-card">
+          <div class="screen-image"></div>
+          <div class="screen-info">
+            <h3>Activity Reports</h3>
+            <p>Post-walk summary with photos, distance covered, and walker notes about your pet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section process-section">
+    <div class="container">
+      <span class="section-label">Methodology</span>
+      <h2 class="section-title">Design Process</h2>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-number">1</div>
+          <h3>Research</h3>
+          <p>Conducted user interviews with pet owners and dog walkers to identify pain points and opportunities.</p>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number">2</div>
+          <h3>Ideation</h3>
+          <p>Created user personas, journey maps, and sketched initial concepts for key user flows.</p>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number">3</div>
+          <h3>Wireframing</h3>
+          <p>Developed low-fidelity wireframes to establish information architecture and navigation patterns.</p>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number">4</div>
+          <h3>Visual Design</h3>
+          <p>Created high-fidelity mockups with a cohesive design system and brand identity.</p>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number">5</div>
+          <h3>Prototyping</h3>
+          <p>Built interactive prototypes in Figma to demonstrate user flows and micro-interactions.</p>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number">6</div>
+          <h3>Testing</h3>
+          <p>Conducted usability tests and iterated based on feedback to refine the experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Experience the Full Prototype</h2>
+      <p>Explore the complete interactive design with animations, transitions, and real user flows in Figma.</p>
+      <a href="https://www.figma.com/proto/ocRjkHojglsz0wreyhwt6i/221050584?node-id=91-957&p=f&t=BcpemaJfUQom0guM-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=30%3A273" target="_blank" class="prototype-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+        </svg>
+        Open Figma Prototype
+      </a>
+    </div>
+  </section>
+
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.screen-card, .process-step').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

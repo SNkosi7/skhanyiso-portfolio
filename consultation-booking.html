@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Consultation Booking Platform | Skhanyiso Nkosi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #1a1a2e;
+      --color-secondary: #16213e;
+      --color-accent: #667eea;
+      --color-accent-light: #764ba2;
+      --color-green: #00d4aa;
+      --color-off-white: #f8f9fa;
+      --color-light-gray: #e9ecef;
+      --color-gray: #6c757d;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-primary);
+      line-height: 1.7;
+      background: var(--color-off-white);
+    }
+
+    .back-link {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: white;
+      color: var(--color-primary);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      transform: translateX(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-hero {
+      min-height: 75vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 2rem;
+    }
+
+    .project-hero::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 0.1) 0%, transparent 50%);
+    }
+
+    .hero-content {
+      max-width: 1000px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      color: white;
+    }
+
+    .project-tag {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-description {
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      opacity: 0.95;
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .tech-badge {
+      padding: 0.5rem 1.25rem;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+    }
+
+    .overview-content p {
+      color: var(--color-gray);
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: white;
+      font-size: 1.75rem;
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .feature-card p {
+      color: var(--color-gray);
+      line-height: 1.7;
+    }
+
+    .stats-section {
+      background: white;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--color-gray);
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .architecture-section {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .architecture-section .section-title {
+      color: white;
+    }
+
+    .architecture-diagram {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 3rem;
+      margin-top: 3rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .architecture-layers {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .layer {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .layer:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateX(10px);
+    }
+
+    .layer h4 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--color-green);
+    }
+
+    .layer p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.95rem;
+    }
+
+    .screenshots-section {
+      background: var(--color-off-white);
+    }
+
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .screenshot-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: all 0.4s ease;
+    }
+
+    .screenshot-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .screenshot-image {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+    }
+
+    .screenshot-info {
+      padding: 1.5rem;
+    }
+
+    .screenshot-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      margin-bottom: 0.75rem;
+      color: var(--color-primary);
+    }
+
+    .screenshot-info p {
+      color: var(--color-gray);
+    }
+
+    .challenges-section {
+      background: white;
+    }
+
+    .challenges-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .challenge-solution {
+      padding: 2rem;
+      background: var(--color-off-white);
+      border-radius: 16px;
+      border-left: 4px solid var(--color-accent);
+    }
+
+    .challenge-solution h4 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--color-accent);
+    }
+
+    .challenge-solution p {
+      color: var(--color-gray);
+      line-height: 1.8;
+    }
+
+    @media (max-width: 992px) {
+      .overview-grid,
+      .challenges-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .back-link {
+        position: static;
+        margin: 1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 3rem 0;
+      }
+
+      .screenshots-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    Back to Portfolio
+  </a>
+
+  <section class="project-hero">
+    <div class="hero-content">
+      <div class="project-tag">Mobile Application Development</div>
+      <h1 class="hero-title">Consultation Booking Platform</h1>
+      <p class="hero-description">
+        A comprehensive mobile solution enabling students to seamlessly book consultations with administrators, featuring real-time scheduling, notifications, and cloud integration
+      </p>
+      <div class="tech-stack">
+        <span class="tech-badge">Flutter</span>
+        <span class="tech-badge">Dart</span>
+        <span class="tech-badge">Firebase</span>
+        <span class="tech-badge">Firestore</span>
+        <span class="tech-badge">Cloud Functions</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="section-label">Project Overview</span>
+      <h2 class="section-title">Streamlining Academic Support</h2>
+      
+      <div class="overview-grid">
+        <div class="overview-content">
+          <p>
+            The Consultation Booking Platform was developed to address the inefficiencies in student-administrator communication at educational institutions. Prior to this solution, students faced difficulties scheduling consultations, often relying on email chains and manual coordination.
+          </p>
+          <p>
+            This mobile application provides a centralized platform where students can view administrator availability, book time slots, receive confirmations, and get reminders—all within a seamless, user-friendly interface built with Flutter and powered by Firebase.
+          </p>
+          <p>
+            The app features robust authentication, real-time updates, push notifications, and an intuitive booking flow that reduces scheduling conflicts and improves the overall student experience.
+          </p>
+        </div>
+
+        <div>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Cloud-based</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">Real-time</div>
+              <div class="stat-label">Sync</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">Secure</div>
+              <div class="stat-label">Authentication</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--color-off-white);">
+    <div class="container">
+      <span class="section-label">Core Capabilities</span>
+      <h2 class="section-title">Key Features</h2>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔐</div>
+          <h3>Secure Authentication</h3>
+          <p>Firebase Authentication with email/password and multi-factor support ensures data security and user privacy.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📅</div>
+          <h3>Smart Scheduling</h3>
+          <p>Intuitive calendar interface showing administrator availability with real-time slot booking and conflict prevention.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔔</div>
+          <h3>Push Notifications</h3>
+          <p>Automated reminders and updates sent via Firebase Cloud Messaging to keep users informed about their bookings.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">☁️</div>
+          <h3>Cloud Integration</h3>
+          <p>Firestore database ensures data persistence, real-time synchronization, and offline capabilities.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">👥</div>
+          <h3>Role Management</h3>
+          <p>Separate interfaces for students and administrators with role-based access control and permissions.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Booking History</h3>
+          <p>Complete consultation history with status tracking, notes, and the ability to rebook or cancel appointments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section architecture-section">
+    <div class="container">
+      <span class="section-label" style="color: var(--color-green);">Technical Stack</span>
+      <h2 class="section-title">Application Architecture</h2>
+
+      <div class="architecture-diagram">
+        <div class="architecture-layers">
+          <div class="layer">
+            <h4>Presentation Layer</h4>
+            <p>Flutter widgets with BLoC pattern for state management, responsive UI components, and custom animations</p>
+          </div>
+
+          <div class="layer">
+            <h4>Business Logic Layer</h4>
+            <p>BLoC/Cubit classes handling booking logic, validation, user authentication, and data transformation</p>
+          </div>
+
+          <div class="layer">
+            <h4>Data Layer</h4>
+            <p>Repository pattern with Firebase services abstraction, data models, and local caching with Hive</p>
+          </div>
+
+          <div class="layer">
+            <h4>Firebase Backend</h4>
+            <p>Firestore for database, Cloud Functions for server-side logic, Authentication, and Cloud Messaging</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section screenshots-section">
+    <div class="container">
+      <span class="section-label">User Interface</span>
+      <h2 class="section-title">App Screens</h2>
+
+      <div class="screenshots-grid">
+        <div class="screenshot-card">
+          <div class="screenshot-image">🔐</div>
+          <div class="screenshot-info">
+            <h3>Authentication</h3>
+            <p>Clean login and registration screens with email verification and password recovery options.</p>
+          </div>
+        </div>
+
+        <div class="screenshot-card">
+          <div class="screenshot-image">🏠</div>
+          <div class="screenshot-info">
+            <h3>Dashboard</h3>
+            <p>Personalized home screen showing upcoming consultations, quick actions, and recent activity.</p>
+          </div>
+        </div>
+
+        <div class="screenshot-card">
+          <div class="screenshot-image">📅</div>
+          <div class="screenshot-info">
+            <h3>Calendar View</h3>
+            <p>Interactive calendar displaying administrator availability with color-coded time slots.</p>
+          </div>
+        </div>
+
+        <div class="screenshot-card">
+          <div class="screenshot-image">✅</div>
+          <div class="screenshot-info">
+            <h3>Booking Confirmation</h3>
+            <p>Clear confirmation screen with booking details, administrator info, and calendar integration.</p>
+          </div>
+        </div>
+
+        <div class="screenshot-card">
+          <div class="screenshot-image">📋</div>
+          <div class="screenshot-info">
+            <h3>My Consultations</h3>
+            <p>List view of all bookings with filters, search, and quick access to consultation details.</p>
+          </div>
+        </div>
+
+        <div class="screenshot-card">
+          <div class="screenshot-image">⚙️</div>
+          <div class="screenshot-info">
+            <h3>Settings & Profile</h3>
+            <p>User profile management, notification preferences, and account settings.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section challenges-section">
+    <div class="container">
+      <span class="section-label">Development Journey</span>
+      <h2 class="section-title">Challenges & Solutions</h2>
+
+      <div class="challenges-grid">
+        <div class="challenge-solution">
+          <h4>Challenge: Real-time Synchronization</h4>
+          <p>
+            Ensuring booking data stayed synchronized across multiple users in real-time without conflicts. Implemented Firestore's real-time listeners with optimistic updates and conflict resolution logic to handle simultaneous booking attempts.
+          </p>
+        </div>
+
+        <div class="challenge-solution">
+          <h4>Solution: Stream-based Architecture</h4>
+          <p>
+            Utilized Flutter's Stream and StreamBuilder widgets combined with Firestore snapshots to automatically update the UI whenever data changes, providing a seamless real-time experience.
+          </p>
+        </div>
+
+        <div class="challenge-solution">
+          <h4>Challenge: Offline Functionality</h4>
+          <p>
+            Students needed access to view their bookings even without internet connectivity. Firebase's offline persistence wasn't sufficient for complex queries and filtering requirements.
+          </p>
+        </div>
+
+        <div class="challenge-solution">
+          <h4>Solution: Local Database Layer</h4>
+          <p>
+            Integrated Hive as a local NoSQL database for caching booking data, enabling offline viewing and implementing a sync mechanism that updates local data when connectivity is restored.
+          </p>
+        </div>
+
+        <div class="challenge-solution">
+          <h4>Challenge: Notification Reliability</h4>
+          <p>
+            Ensuring users received timely reminders about upcoming consultations across different device states (foreground, background, terminated).
+          </p>
+        </div>
+
+        <div class="challenge-solution">
+          <h4>Solution: Cloud Functions Integration</h4>
+          <p>
+            Implemented Firebase Cloud Functions to schedule and send notifications at predetermined times, ensuring delivery regardless of app state and providing fallback notification strategies.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section stats-section">
+    <div class="container">
+      <span class="section-label">Impact & Results</span>
+      <h2 class="section-title">Project Outcomes</h2>
+
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">95%</div>
+          <div class="stat-label">Reduced Scheduling Time</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number">Zero</div>
+          <div class="stat-label">Double Bookings</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number">Real-time</div>
+          <div class="stat-label">Updates</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Cloud Coverage</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 4rem; text-align: center;">
+        <p style="font-size: 1.15rem; color: var(--color-gray); max-width: 700px; margin: 0 auto;">
+          This project demonstrates proficiency in Flutter development, Firebase integration, state management, and building scalable mobile applications with real-world impact.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.feature-card, .screenshot-card, .challenge-solution, .layer').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

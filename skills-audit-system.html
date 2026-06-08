@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Integrated Skills Audit System | Skhanyiso Nkosi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #1a1a2e;
+      --color-secondary: #16213e;
+      --color-accent: #d4af37;
+      --color-accent-dark: #b8941f;
+      --color-blue: #3282b8;
+      --color-green: #06d6a0;
+      --color-off-white: #f8f9fa;
+      --color-light-gray: #e9ecef;
+      --color-gray: #6c757d;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-primary);
+      line-height: 1.7;
+      background: var(--color-off-white);
+    }
+
+    .back-link {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: white;
+      color: var(--color-primary);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      transform: translateX(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-hero {
+      min-height: 80vh;
+      background: linear-gradient(135deg, #1a1a2e 0%, #d4af37 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 2rem;
+    }
+
+    .project-hero::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(50, 130, 184, 0.1) 0%, transparent 50%);
+    }
+
+    .hero-content {
+      max-width: 1100px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      color: white;
+    }
+
+    .project-badge {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      opacity: 0.95;
+    }
+
+    .hero-description {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      opacity: 0.9;
+      max-width: 800px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-top: 2.5rem;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .meta-label {
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      opacity: 0.8;
+    }
+
+    .tech-stack {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .tech-badge {
+      padding: 0.5rem 1.25rem;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    .executive-summary {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      border-left: 6px solid var(--color-accent);
+      margin-top: 3rem;
+    }
+
+    .executive-summary p {
+      font-size: 1.15rem;
+      color: var(--color-gray);
+      line-height: 1.9;
+    }
+
+    .problem-solution {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .problem-box, .solution-box {
+      padding: 2.5rem;
+      border-radius: 16px;
+    }
+
+    .problem-box {
+      background: #fff5f5;
+      border-left: 4px solid #e53e3e;
+    }
+
+    .solution-box {
+      background: #f0fdf4;
+      border-left: 4px solid var(--color-green);
+    }
+
+    .problem-box h3, .solution-box h3 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .problem-box h3 {
+      color: #c53030;
+    }
+
+    .solution-box h3 {
+      color: #047857;
+    }
+
+    .problem-box p, .solution-box p {
+      color: var(--color-gray);
+      line-height: 1.8;
+    }
+
+    .sdlc-section {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .sdlc-section .section-label {
+      color: var(--color-accent);
+    }
+
+    .sdlc-section .section-title {
+      color: white;
+    }
+
+    .sdlc-phases {
+      display: grid;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .phase-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2.5rem;
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phase-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--color-accent);
+    }
+
+    .phase-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateX(10px);
+    }
+
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .phase-number {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .phase-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      color: var(--color-accent);
+    }
+
+    .phase-card p {
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .artifacts {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .artifacts strong {
+      color: var(--color-accent);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .artifacts ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+
+    .artifacts li {
+      color: rgba(255, 255, 255, 0.8);
+      padding: 0.25rem 0;
+      position: relative;
+    }
+
+    .artifacts li::before {
+      content: '▹';
+      position: absolute;
+      left: -1rem;
+      color: var(--color-accent);
+    }
+
+    .architecture-section {
+      background: var(--color-off-white);
+    }
+
+    .architecture-diagram {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .arch-layer {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .arch-layer::after {
+      content: '→';
+      position: absolute;
+      right: -1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      color: var(--color-accent);
+      z-index: 1;
+    }
+
+    .arch-layer:last-child::after {
+      display: none;
+    }
+
+    .arch-layer:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .arch-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .arch-layer h4 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .arch-layer p {
+      color: var(--color-gray);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .tech-highlights {
+      background: white;
+    }
+
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .highlight-card {
+      background: var(--color-off-white);
+      padding: 2rem;
+      border-radius: 16px;
+      border-top: 4px solid var(--color-accent);
+      transition: all 0.3s ease;
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .highlight-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: white;
+      font-size: 1.75rem;
+    }
+
+    .highlight-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .highlight-card p {
+      color: var(--color-gray);
+      line-height: 1.7;
+    }
+
+    .impact-section {
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+      color: white;
+      padding: 6rem 0;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .impact-item {
+      text-align: center;
+    }
+
+    .impact-number {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .impact-label {
+      font-size: 1.15rem;
+      font-weight: 500;
+      opacity: 0.95;
+    }
+
+    .impact-description {
+      font-size: 0.95rem;
+      opacity: 0.8;
+      margin-top: 0.5rem;
+    }
+
+    .key-learnings {
+      background: white;
+    }
+
+    .learning-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .learning-card {
+      background: var(--color-off-white);
+      padding: 2rem;
+      border-radius: 16px;
+      border-left: 4px solid var(--color-blue);
+    }
+
+    .learning-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .learning-card p {
+      color: var(--color-gray);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 992px) {
+      .problem-solution,
+      .architecture-diagram {
+        grid-template-columns: 1fr;
+      }
+
+      .arch-layer::after {
+        display: none;
+      }
+
+      .back-link {
+        position: static;
+        margin: 1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 3rem 0;
+      }
+
+      .executive-summary {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    Back to Portfolio
+  </a>
+
+  <section class="project-hero">
+    <div class="hero-content">
+      <div class="project-badge">Work Integrated Learning Project</div>
+      <h1 class="hero-title">Integrated Skills Audit System</h1>
+      <p class="hero-subtitle">Lead Systems Developer</p>
+      <p class="hero-description">
+        A comprehensive dual-platform solution automating skills auditing and compliance tracking through an integrated mobile-web ecosystem for National Treasury case study
+      </p>
+      <div class="tech-stack">
+        <span class="tech-badge">Flutter</span>
+        <span class="tech-badge">ASP.NET Core</span>
+        <span class="tech-badge">MS SQL Server</span>
+        <span class="tech-badge">Firebase</span>
+        <span class="tech-badge">Web API</span>
+      </div>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Role</span>
+          <span>Lead Systems Developer</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Client</span>
+          <span>National Treasury (Case Study)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Type</span>
+          <span>Enterprise Solution</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Timeline</span>
+          <span>WIL Period</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="section-label">Executive Summary</span>
+      <h2 class="section-title">Project Overview</h2>
+
+      <div class="executive-summary">
+        <p>
+          I developed a dual-platform integrated system designed to automate the process of skills auditing and compliance tracking. The solution consists of a <strong>Flutter mobile application</strong> for employee self-assessment and an <strong>ASP.NET Core web dashboard</strong> for administrative oversight and reporting. This enterprise-grade system eliminates manual processes, ensures data integrity, and provides real-time visibility into organizational skill gaps.
+        </p>
+      </div>
+
+      <div class="problem-solution">
+        <div class="problem-box">
+          <h3>The Problem</h3>
+          <p>
+            Manual, paper-based skills tracking led to data silos, compliance risks, and delayed reporting. Organizations struggled with fragmented information, making it impossible to identify skill gaps or plan development initiatives effectively. The lack of real-time data meant decisions were made on outdated information.
+          </p>
+        </div>
+
+        <div class="solution-box">
+          <h3>The Solution</h3>
+          <p>
+            A centralized, secure digital repository with real-time reporting capabilities. The integrated mobile-web platform enables employees to self-assess while administrators gain instant visibility through comprehensive dashboards. Automated workflows ensure compliance and eliminate data redundancy.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sdlc-section">
+    <div class="container">
+      <span class="section-label">Systems Engineering Approach</span>
+      <h2 class="section-title">Software Development Lifecycle</h2>
+
+      <div class="sdlc-phases">
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-number">1</div>
+            <h3>Planning & Business Case</h3>
+          </div>
+          <p>
+            Initiated the project by conducting a comprehensive <strong>Feasibility Analysis</strong> to ensure the technical stack aligned with the client's infrastructure and organizational needs. Evaluated cost-benefit scenarios and identified key success metrics.
+          </p>
+          <div class="artifacts">
+            <strong>Deliverables:</strong>
+            <ul>
+              <li>Business Case Document</li>
+              <li>Project Charter</li>
+              <li>Stakeholder Analysis & Mapping</li>
+              <li>Technical Feasibility Report</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-number">2</div>
+            <h3>Requirements Analysis</h3>
+          </div>
+          <p>
+            Translated high-level business needs into detailed technical specifications through stakeholder interviews and process mapping. Defined comprehensive functional and non-functional requirements ensuring system scalability and security.
+          </p>
+          <div class="artifacts">
+            <strong>Key Outputs:</strong>
+            <ul>
+              <li>Functional Requirements: Full CRUD operations for profiles, skills matrices, and audit logs</li>
+              <li>User Roles: Engineered Role-Based Access Control (RBAC) for Admins and Standard Users</li>
+              <li>Non-Functional: Data Integrity, Scalability, and Performance benchmarks</li>
+              <li>Use Case Diagrams and User Stories</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-number">3</div>
+            <h3>System Architecture & Design</h3>
+          </div>
+          <p>
+            Designed a decoupled, scalable architecture enabling independent scaling of front-end and back-end components. Implemented industry best practices including the Repository Pattern for data abstraction and dependency injection for maintainability.
+          </p>
+          <div class="artifacts">
+            <strong>Architecture Components:</strong>
+            <ul>
+              <li>Backend: ASP.NET Core Web API with Repository Pattern</li>
+              <li>Frontend: Flutter cross-platform mobile application</li>
+              <li>Database: Relational schema in MS SQL Server</li>
+              <li>Integration: RESTful API architecture with JWT authentication</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-number">4</div>
+            <h3>Implementation & Development</h3>
+          </div>
+          <p>
+            Executed development using Agile methodologies with iterative sprints. Implemented CI/CD pipelines for automated testing and deployment. Focused on code quality through comprehensive unit testing and code reviews.
+          </p>
+          <div class="artifacts">
+            <strong>Development Practices:</strong>
+            <ul>
+              <li>Version control with Git branching strategies</li>
+              <li>Automated testing and continuous integration</li>
+              <li>Code documentation and API specifications</li>
+              <li>Security-first development approach</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-number">5</div>
+            <h3>Testing & Quality Assurance</h3>
+          </div>
+          <p>
+            Conducted comprehensive testing across multiple levels: unit tests for individual components, integration tests for API endpoints, and user acceptance testing with stakeholders. Validated performance under expected load conditions.
+          </p>
+          <div class="artifacts">
+            <strong>Testing Strategy:</strong>
+            <ul>
+              <li>Unit Testing with xUnit framework</li>
+              <li>Integration Testing for API endpoints</li>
+              <li>User Acceptance Testing (UAT)</li>
+              <li>Performance and Load Testing</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-number">6</div>
+            <h3>Deployment & Maintenance</h3>
+          </div>
+          <p>
+            Deployed the system to production environment with comprehensive monitoring and logging. Established maintenance procedures and created detailed documentation for administrators and end-users.
+          </p>
+          <div class="artifacts">
+            <strong>Deployment Outputs:</strong>
+            <ul>
+              <li>Production deployment with monitoring</li>
+              <li>Administrator training materials</li>
+              <li>User documentation and guides</li>
+              <li>Maintenance and support procedures</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: white;">
+    <div class="container">
+      <span class="section-label">Project Documentation</span>
+      <h2 class="section-title">Software Requirements Specification</h2>
+
+      <p style="font-size: 1.15rem; color: var(--color-gray); margin-bottom: 3rem; line-height: 1.8;">
+        Comprehensive requirements documentation following IEEE 830 standards, defining the system's functional and non-functional requirements, constraints, and acceptance criteria.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+        <div style="background: var(--color-off-white); padding: 2rem; border-radius: 16px; border-top: 4px solid var(--color-accent);">
+          <h4 style="font-family: var(--font-display); font-size: 1.35rem; margin-bottom: 1rem; color: var(--color-primary);">Functional Requirements</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-accent); font-weight: 700;">✓</span>
+              <span>User authentication and authorization with role-based access</span>
+            </li>
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-accent); font-weight: 700;">✓</span>
+              <span>Employee self-assessment and skills tracking module</span>
+            </li>
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-accent); font-weight: 700;">✓</span>
+              <span>Administrative dashboard with analytics and reporting</span>
+            </li>
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-accent); font-weight: 700;">✓</span>
+              <span>Skills gap identification and analysis tools</span>
+            </li>
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-accent); font-weight: 700;">✓</span>
+              <span>Data export and report generation capabilities</span>
+            </li>
+          </ul>
+        </div>
+
+        <div style="background: var(--color-off-white); padding: 2rem; border-radius: 16px; border-top: 4px solid var(--color-blue);">
+          <h4 style="font-family: var(--font-display); font-size: 1.35rem; margin-bottom: 1rem; color: var(--color-primary);">Non-Functional Requirements</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-blue); font-weight: 700;">✓</span>
+              <span>Performance: Response time < 2 seconds for queries</span>
+            </li>
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-blue); font-weight: 700;">✓</span>
+              <span>Scalability: Support for 1000+ concurrent users</span>
+            </li>
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-blue); font-weight: 700;">✓</span>
+              <span>Security: Data encryption and secure authentication</span>
+            </li>
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-blue); font-weight: 700;">✓</span>
+              <span>Availability: 99.5% uptime with redundancy</span>
+            </li>
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-blue); font-weight: 700;">✓</span>
+              <span>Usability: Intuitive interface requiring minimal training</span>
+            </li>
+          </ul>
+        </div>
+
+        <div style="background: var(--color-off-white); padding: 2rem; border-radius: 16px; border-top: 4px solid var(--color-green);">
+          <h4 style="font-family: var(--font-display); font-size: 1.35rem; margin-bottom: 1rem; color: var(--color-primary);">System Constraints</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-green); font-weight: 700;">✓</span>
+              <span>Must integrate with existing Active Directory</span>
+            </li>
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-green); font-weight: 700;">✓</span>
+              <span>Compliance with government data protection policies</span>
+            </li>
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-green); font-weight: 700;">✓</span>
+              <span>Cross-platform mobile support (iOS/Android)</span>
+            </li>
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-green); font-weight: 700;">✓</span>
+              <span>Budget constraints for cloud infrastructure</span>
+            </li>
+            <li style="padding: 0.5rem 0; color: var(--color-gray); display: flex; align-items: start; gap: 0.75rem;">
+              <span style="color: var(--color-green); font-weight: 700;">✓</span>
+              <span>Offline functionality for field operations</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top: 3rem; padding: 2.5rem; background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark)); border-radius: 16px; color: white; text-align: center;">
+        <h4 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1rem;">Complete SRS Document</h4>
+        <p style="opacity: 0.95; margin-bottom: 1.5rem; line-height: 1.8;">
+          The full Software Requirements Specification includes detailed use cases, user stories, data flow diagrams, entity-relationship diagrams, and acceptance criteria for all system components.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="assets/SRS-Document.pdf" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.75rem; background: white; color: var(--color-accent); border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;" download>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+            Download SRS Document
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section architecture-section">
+    <div class="container">
+      <span class="section-label">Technical Design</span>
+      <h2 class="section-title">System Architecture</h2>
+
+      <div class="architecture-diagram">
+        <div class="arch-layer">
+          <div class="arch-icon">📱</div>
+          <h4>Mobile Client</h4>
+          <p>
+            Flutter application with BLoC state management, offline-first architecture, and secure local storage for employee self-assessment and skills tracking
+          </p>
+        </div>
+
+        <div class="arch-layer">
+          <div class="arch-icon">🔌</div>
+          <h4>API Layer</h4>
+          <p>
+            ASP.NET Core Web API implementing RESTful endpoints, JWT authentication, Repository Pattern, and comprehensive validation middleware
+          </p>
+        </div>
+
+        <div class="arch-layer">
+          <div class="arch-icon">💾</div>
+          <h4>Data Layer</h4>
+          <p>
+            MS SQL Server with normalized schema, Entity Framework Core ORM, stored procedures for complex operations, and automated backup strategies
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: 4rem; padding: 2.5rem; background: white; border-radius: 16px; box-shadow: var(--shadow-md);">
+        <h3 style="font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 1.5rem; color: var(--color-primary);">Web Dashboard</h3>
+        <p style="color: var(--color-gray); line-height: 1.8; margin-bottom: 1rem;">
+          The administrative web dashboard provides comprehensive oversight with real-time analytics, advanced reporting capabilities, and role-based access control. Built using ASP.NET Core MVC with Razor views and responsive design.
+        </p>
+        <p style="color: var(--color-gray); line-height: 1.8;">
+          <strong>Key Features:</strong> Skills gap analysis, compliance tracking, employee performance visualization, custom report generation, and automated alert systems for critical skill shortages.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: white;">
+    <div class="container">
+      <span class="section-label">Visual Design</span>
+      <h2 class="section-title">Design Mockups & Prototypes</h2>
+
+      <p style="font-size: 1.15rem; color: var(--color-gray); margin-bottom: 3rem; line-height: 1.8; max-width: 800px;">
+        Comprehensive design documentation including wireframes, high-fidelity mockups, and interactive prototypes created during the design phase to validate user flows and interface concepts.
+      </p>
+
+      <div style="background: var(--color-off-white); padding: 3rem; border-radius: 20px; margin-bottom: 3rem;">
+        <h3 style="font-family: var(--font-display); font-size: 2rem; margin-bottom: 2rem; color: var(--color-primary); text-align: center;">Design Process</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+          <div style="text-align: center;">
+            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: white; font-size: 1.5rem; font-weight: 700;">1</div>
+            <h4 style="font-weight: 600; margin-bottom: 0.5rem;">User Research</h4>
+            <p style="font-size: 0.9rem; color: var(--color-gray);">Interviews & surveys</p>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: white; font-size: 1.5rem; font-weight: 700;">2</div>
+            <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Wireframing</h4>
+            <p style="font-size: 0.9rem; color: var(--color-gray);">Low-fidelity layouts</p>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: white; font-size: 1.5rem; font-weight: 700;">3</div>
+            <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Visual Design</h4>
+            <p style="font-size: 0.9rem; color: var(--color-gray);">High-fidelity mockups</p>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: white; font-size: 1.5rem; font-weight: 700;">4</div>
+            <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Prototyping</h4>
+            <p style="font-size: 0.9rem; color: var(--color-gray);">Interactive flows</p>
+          </div>
+        </div>
+
+        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-sm);">
+          <h4 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 1rem;">Design Principles</h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+            <div>
+              <strong style="color: var(--color-accent);">Consistency</strong>
+              <p style="font-size: 0.9rem; color: var(--color-gray); margin-top: 0.25rem;">Unified visual language across platforms</p>
+            </div>
+            <div>
+              <strong style="color: var(--color-accent);">Accessibility</strong>
+              <p style="font-size: 0.9rem; color: var(--color-gray); margin-top: 0.25rem;">WCAG 2.1 AA compliance</p>
+            </div>
+            <div>
+              <strong style="color: var(--color-accent);">Efficiency</strong>
+              <p style="font-size: 0.9rem; color: var(--color-gray); margin-top: 0.25rem;">Minimal steps to complete tasks</p>
+            </div>
+            <div>
+              <strong style="color: var(--color-accent);">Feedback</strong>
+              <p style="font-size: 0.9rem; color: var(--color-gray); margin-top: 0.25rem;">Clear system status indicators</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--color-off-white);">
+    <div class="container">
+      <span class="section-label">Mobile Application</span>
+      <h2 class="section-title">Mobile App Screenshots</h2>
+
+      <p style="font-size: 1.1rem; color: var(--color-gray); margin-bottom: 3rem; line-height: 1.8; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto;">
+        Flutter-based mobile application providing employees with an intuitive interface for skills self-assessment and tracking
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; margin-top: 3rem;">
+        <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md); transition: all 0.3s ease;" class="screenshot-card">
+          <div style="width: 100%; aspect-ratio: 9/16; background: linear-gradient(135deg, #1a1a2e, #d4af37); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+            <img src="assets/mobile-login.png" alt="Mobile Login Screen" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='🔐'">
+          </div>
+          <div style="padding: 1.5rem;">
+            <h4 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-primary);">Authentication</h4>
+            <p style="color: var(--color-gray); font-size: 0.95rem;">Secure login with biometric authentication and session management</p>
+          </div>
+        </div>
+
+        <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md); transition: all 0.3s ease;" class="screenshot-card">
+          <div style="width: 100%; aspect-ratio: 9/16; background: linear-gradient(135deg, #1a1a2e, #d4af37); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+            <img src="assets/mobile-dashboard.png" alt="Mobile Dashboard" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='📊'">
+          </div>
+          <div style="padding: 1.5rem;">
+            <h4 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-primary);">Dashboard</h4>
+            <p style="color: var(--color-gray); font-size: 0.95rem;">Personalized home screen with quick access to skills assessment</p>
+          </div>
+        </div>
+
+        <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md); transition: all 0.3s ease;" class="screenshot-card">
+          <div style="width: 100%; aspect-ratio: 9/16; background: linear-gradient(135deg, #1a1a2e, #d4af37); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+            <img src="assets/mobile-skills.png" alt="Skills Assessment" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='✅'">
+          </div>
+          <div style="padding: 1.5rem;">
+            <h4 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-primary);">Skills Assessment</h4>
+            <p style="color: var(--color-gray); font-size: 0.95rem;">Interactive self-evaluation with progress tracking and validation</p>
+          </div>
+        </div>
+
+        <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md); transition: all 0.3s ease;" class="screenshot-card">
+          <div style="width: 100%; aspect-ratio: 9/16; background: linear-gradient(135deg, #1a1a2e, #d4af37); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+            <img src="assets/mobile-profile.png" alt="User Profile" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='👤'">
+          </div>
+          <div style="padding: 1.5rem;">
+            <h4 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-primary);">User Profile</h4>
+            <p style="color: var(--color-gray); font-size: 0.95rem;">Personal information and skills history with achievement tracking</p>
+          </div>
+        </div>
+
+        <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md); transition: all 0.3s ease;" class="screenshot-card">
+          <div style="width: 100%; aspect-ratio: 9/16; background: linear-gradient(135deg, #1a1a2e, #d4af37); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+            <img src="assets/mobile-reports.png" alt="Reports View" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='📈'">
+          </div>
+          <div style="padding: 1.5rem;">
+            <h4 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-primary);">Reports & Analytics</h4>
+            <p style="color: var(--color-gray); font-size: 0.95rem;">Visual charts showing skill development and competency levels</p>
+          </div>
+        </div>
+
+        <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md); transition: all 0.3s ease;" class="screenshot-card">
+          <div style="width: 100%; aspect-ratio: 9/16; background: linear-gradient(135deg, #1a1a2e, #d4af37); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+            <img src="assets/mobile-settings.png" alt="Settings" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='⚙️'">
+          </div>
+          <div style="padding: 1.5rem;">
+            <h4 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-primary);">Settings</h4>
+            <p style="color: var(--color-gray); font-size: 0.95rem;">Customization options and notification preferences</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: white;">
+    <div class="container">
+      <span class="section-label">Web Dashboard</span>
+      <h2 class="section-title">Administrative Interface</h2>
+
+      <p style="font-size: 1.1rem; color: var(--color-gray); margin-bottom: 3rem; line-height: 1.8; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto;">
+        ASP.NET Core web application providing administrators with comprehensive oversight and advanced reporting capabilities
+      </p>
+
+      <div style="display: grid; gap: 3rem; margin-top: 3rem;">
+        <div style="background: var(--color-off-white); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md);" class="screenshot-card">
+          <div style="width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, #1a1a2e, #d4af37); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
+            <img src="assets/web-dashboard.png" alt="Web Dashboard" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='📊'">
+          </div>
+          <div style="padding: 2rem;">
+            <h4 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-primary);">Main Dashboard</h4>
+            <p style="color: var(--color-gray); line-height: 1.7;">Comprehensive overview with real-time statistics, skills gap analysis, and quick access to key administrative functions. Features interactive charts and customizable widgets.</p>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+          <div style="background: var(--color-off-white); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md);" class="screenshot-card">
+            <div style="width: 100%; aspect-ratio: 16/10; background: linear-gradient(135deg, #1a1a2e, #d4af37); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+              <img src="assets/web-employees.png" alt="Employee Management" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='👥'">
+            </div>
+            <div style="padding: 1.5rem;">
+              <h4 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-primary);">Employee Management</h4>
+              <p style="color: var(--color-gray); font-size: 0.95rem;">Complete employee directory with search, filter, and bulk operations</p>
+            </div>
+          </div>
+
+          <div style="background: var(--color-off-white); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md);" class="screenshot-card">
+            <div style="width: 100%; aspect-ratio: 16/10; background: linear-gradient(135deg, #1a1a2e, #d4af37); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+              <img src="assets/web-skills-matrix.png" alt="Skills Matrix" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='📋'">
+            </div>
+            <div style="padding: 1.5rem;">
+              <h4 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-primary);">Skills Matrix</h4>
+              <p style="color: var(--color-gray); font-size: 0.95rem;">Visual representation of organizational competencies and skill levels</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+          <div style="background: var(--color-off-white); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md);" class="screenshot-card">
+            <div style="width: 100%; aspect-ratio: 16/10; background: linear-gradient(135deg, #1a1a2e, #d4af37); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+              <img src="assets/web-reports.png" alt="Advanced Reports" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='📈'">
+            </div>
+            <div style="padding: 1.5rem;">
+              <h4 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-primary);">Advanced Reporting</h4>
+              <p style="color: var(--color-gray); font-size: 0.95rem;">Customizable reports with export to PDF, Excel, and CSV formats</p>
+            </div>
+          </div>
+
+          <div style="background: var(--color-off-white); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md);" class="screenshot-card">
+            <div style="width: 100%; aspect-ratio: 16/10; background: linear-gradient(135deg, #1a1a2e, #d4af37); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+              <img src="assets/web-audit-log.png" alt="Audit Log" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='📜'">
+            </div>
+            <div style="padding: 1.5rem;">
+              <h4 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-primary);">Audit Trail</h4>
+              <p style="color: var(--color-gray); font-size: 0.95rem;">Complete activity log with timestamps and user tracking for compliance</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tech-highlights">
+    <div class="container">
+      <span class="section-label">Engineering Excellence</span>
+      <h2 class="section-title">Technical Highlights</h2>
+
+      <div class="highlights-grid">
+        <div class="highlight-card">
+          <div class="highlight-icon">🔗</div>
+          <h4>Integrated Ecosystem</h4>
+          <p>
+            Seamlessly synchronized mobile client with web-based administrative backend through robust API integration. Real-time data synchronization ensures consistency across platforms.
+          </p>
+        </div>
+
+        <div class="highlight-card">
+          <div class="highlight-icon">🔐</div>
+          <h4>Security First</h4>
+          <p>
+            Implemented secure authentication using JWT tokens, data encryption at rest and in transit, and role-based access control to protect sensitive National Treasury information.
+          </p>
+        </div>
+
+        <div class="highlight-card">
+          <div class="highlight-icon">📊</div>
+          <h4>Advanced Reporting</h4>
+          <p>
+            Built a custom reporting engine in the web dashboard to visualize organizational "Skills Gaps" with interactive charts, export capabilities, and scheduled report generation.
+          </p>
+        </div>
+
+        <div class="highlight-card">
+          <div class="highlight-icon">⚡</div>
+          <h4>Performance Optimization</h4>
+          <p>
+            Optimized database queries with proper indexing, implemented caching strategies, and utilized async programming patterns for handling concurrent user loads during audit periods.
+          </p>
+        </div>
+
+        <div class="highlight-card">
+          <div class="highlight-icon">📱</div>
+          <h4>Cross-Platform Consistency</h4>
+          <p>
+            Leveraged Flutter's single codebase for iOS and Android deployment, ensuring consistent user experience across devices while reducing development and maintenance overhead.
+          </p>
+        </div>
+
+        <div class="highlight-card">
+          <div class="highlight-icon">🔄</div>
+          <h4>Scalable Architecture</h4>
+          <p>
+            Designed with scalability in mind using microservices principles, allowing the system to handle thousands of concurrent users and grow with organizational needs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="impact-section">
+    <div class="container">
+      <h2 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); text-align: center; margin-bottom: 1rem;">Project Impact & Outcomes</h2>
+      <p style="text-align: center; font-size: 1.15rem; opacity: 0.9; max-width: 700px; margin: 0 auto 3rem;">Measurable improvements in efficiency, accuracy, and compliance</p>
+
+      <div class="impact-grid">
+        <div class="impact-item">
+          <div class="impact-number">85%</div>
+          <div class="impact-label">Time Reduction</div>
+          <div class="impact-description">Reduced audit processing time</div>
+        </div>
+
+        <div class="impact-item">
+          <div class="impact-number">100%</div>
+          <div class="impact-label">Digital Trail</div>
+          <div class="impact-description">Permanent audit documentation</div>
+        </div>
+
+        <div class="impact-item">
+          <div class="impact-number">Real-time</div>
+          <div class="impact-label">Data Access</div>
+          <div class="impact-description">Instant reporting capabilities</div>
+        </div>
+
+        <div class="impact-item">
+          <div class="impact-number">99.9%</div>
+          <div class="impact-label">Data Accuracy</div>
+          <div class="impact-description">Through validation systems</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section key-learnings">
+    <div class="container">
+      <span class="section-label">Professional Development</span>
+      <h2 class="section-title">Key Learnings & Growth</h2>
+
+      <div class="learning-cards">
+        <div class="learning-card">
+          <h4>Enterprise Architecture</h4>
+          <p>
+            Gained deep understanding of designing scalable, maintainable systems that balance business requirements with technical constraints in enterprise environments.
+          </p>
+        </div>
+
+        <div class="learning-card">
+          <h4>Full-Stack Integration</h4>
+          <p>
+            Mastered the complexities of integrating mobile and web platforms through robust API design, authentication flows, and data synchronization strategies.
+          </p>
+        </div>
+
+        <div class="learning-card">
+          <h4>SDLC in Practice</h4>
+          <p>
+            Applied theoretical SDLC knowledge to real-world scenarios, understanding the importance of documentation, testing, and stakeholder communication.
+          </p>
+        </div>
+
+        <div class="learning-card">
+          <h4>Security & Compliance</h4>
+          <p>
+            Developed expertise in implementing security best practices and ensuring compliance with data protection regulations in government systems.
+          </p>
+        </div>
+
+        <div class="learning-card">
+          <h4>Problem-Solving</h4>
+          <p>
+            Enhanced analytical skills by translating complex business problems into elegant technical solutions that deliver measurable value.
+          </p>
+        </div>
+
+        <div class="learning-card">
+          <h4>Professional Communication</h4>
+          <p>
+            Improved ability to communicate technical concepts to non-technical stakeholders and collaborate effectively in cross-functional teams.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: 4rem; text-align: center; padding: 3rem; background: var(--color-off-white); border-radius: 16px;">
+        <p style="font-size: 1.2rem; color: var(--color-gray); max-width: 800px; margin: 0 auto; line-height: 1.8;">
+          This Work Integrated Learning project demonstrates my ability to deliver enterprise-grade solutions through systematic engineering approaches, bridging the gap between academic knowledge and professional software development practices.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.phase-card, .arch-layer, .highlight-card, .learning-card, .impact-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
